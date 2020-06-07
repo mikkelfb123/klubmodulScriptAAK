@@ -16,7 +16,7 @@ class KlubModul:
         self.end_datetime = datetime.strptime(self.settings["end_date"] + "-{hours}-{minutes}".format(
             hours=self.settings["end_hour"], minutes=self.settings["end_minute"]), '%d-%m-%Y-%H-%M')
 
-        self.booking_url = "https://aarhusklatreklub.klub-modul.dk/Admin/BookingMaintenance.aspx"
+        self.booking_url = self.settings["booking_url"]
         self.events = []
         self.generate_events()
         self.create_events_online()

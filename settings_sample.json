@@ -1,0 +1,19 @@
+//Til settings.json
+{
+  "start_date": "09-06-2020",
+  "end_date": "09-06-2020",
+  "start_hour": 6,
+  "start_minute": 0,
+  "end_hour": 22,
+  "end_minute": 0,
+  "duration_hours": 2,
+  "duration_minutes": 30,
+  "headcount": 5,
+  "arrival_interval_minutes": 15,
+  "username": "",
+  "password": "",
+  "max_waiting_list": 4,
+  "login_url": "https://aarhusklatreklub.klub-modul.dk",
+  "booking_url":"https://aarhusklatreklub.klub-modul.dk/Admin/BookingMaintenance.aspx"
+
+}

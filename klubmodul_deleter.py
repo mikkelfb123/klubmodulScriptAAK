@@ -9,7 +9,7 @@ class KlubModulDeleter:
         self.settings = settings
         self.driver = driver
         self.events = []
-        self.booking_url = "https://aarhusklatreklub.klub-modul.dk/Admin/BookingMaintenance.aspx"
+        self.booking_url = self.settings["booking_url"]
         self.delete_all_events()
 
     def delete_all_events(self):

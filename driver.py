@@ -13,7 +13,7 @@ class Browser(Firefox):
         self.fopt.add_argument("--headless")
         super().__init__(executable_path="./geckodriver", firefox_options=self.fopt)
 
-        self.login_url = "https://aarhusklatreklub.klub-modul.dk"
+        self.login_url = self.settings["login_url"]
 
         self.login()
 
