@@ -28,9 +28,11 @@ class KlubModul:
         event_start_datetime = self.start_datetime
         #tjekker datointerval
         while event_start_datetime <= self.end_datetime:
-            #tjekker event inden for åbningstider
-            if (event_start_datetime.time() > time(hour=self.settings["end_hour"], minute=self.settings["end_hour"])):
-                continue
+            #tjekker event inden for åbningstider ellers næste dag
+            if event_start_datetime.time() > time(hour=self.settings["end_hour"], minute=self.settings["end_minute"]):
+                event_start_datetime = datetime(day=event_start_datetime.day+1, month=event_start_datetime.month,
+                                                year=event_start_datetime.year, hour=self.settings["start_hour"],
+                                                minute=self.settings["start_hour"])
 
             #Hvornår stopper eventet
             event_end_datetime = event_start_datetime + timedelta(hours=self.settings["duration_hours"],

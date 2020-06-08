@@ -1,7 +1,7 @@
 from time import sleep
 
 import bs4
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, JavascriptException
 
 
 class KlubModulDeleter:
@@ -18,8 +18,10 @@ class KlubModulDeleter:
 
         while True:
             events = soup.find_all("a", {"class": "km-slet tooltip"})
-            if len(events) == 0:
+            if len(soup.find_all("a", {"class": "dataTables_empty"})) == 0:
                 return
+
+            print("delete event")
             self.delete_element(events[0]['href'].replace("javascript:", ""))
 
 
@@ -32,7 +34,7 @@ class KlubModulDeleter:
                 self.driver.find_element_by_id("30sbook")
                 self.driver.execute_script("document.getElementById('30sbook').style.display = 'none';")
                 break
-            except (NoSuchElementException, StaleElementReferenceException):
+            except (NoSuchElementException, StaleElementReferenceException, JavascriptException):
                 sleep(0.1)
 
         self.driver.execute_script(script)
