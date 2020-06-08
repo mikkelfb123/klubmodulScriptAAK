@@ -8,6 +8,8 @@ class Main:
     def __init__(self):
         self.settings = json.load(open("settings.json", 'r'))
 
+        print(self.settings)
+
         inp = input("Delete(d) all events/Write(w) from settings")
         if inp in ["D", "d", "Delete", "delete"]:
             self.delete_all_events()

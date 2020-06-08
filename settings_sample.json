@@ -1,19 +1,21 @@
-//Til settings.json
 {
-  "start_date": "09-06-2020",
-  "end_date": "09-06-2020",
-  "start_hour": 6,
+  "start_date": "08-06-2020",
+  "end_date": "08-06-2020",
+  "start_hour": 12,
   "start_minute": 0,
-  "end_hour": 22,
+  "end_hour": 16,
   "end_minute": 0,
-  "duration_hours": 2,
-  "duration_minutes": 30,
-  "headcount": 5,
-  "arrival_interval_minutes": 15,
+  "duration_hours": 1,
+  "duration_minutes": 55,
+  "headcount": 20,
+  "arrival_interval_minutes": 5,
   "username": "",
   "password": "",
-  "max_waiting_list": 4,
-  "login_url": "https://aarhusklatreklub.klub-modul.dk",
-  "booking_url":"https://aarhusklatreklub.klub-modul.dk/Admin/BookingMaintenance.aspx"
+  "max_waiting_list": 0,
+  "login_url": "https://aalborgklatreklub.dk",
+  "booking_url":"https://aalborgklatreklub.dk/Admin/BookingMaintenance.aspx",
+  "instructor": "Stikprøve",
+  "description": "test",
+  "title": ""
 
 }

@@ -11,7 +11,7 @@ class Browser(Firefox):
 
         self.fopt = Options()
         self.fopt.add_argument("--headless")
-        super().__init__(executable_path="./geckodriver", firefox_options=self.fopt)
+        super().__init__(executable_path="./geckodriver.exe", firefox_options=self.fopt)
 
         self.login_url = self.settings["login_url"]
 

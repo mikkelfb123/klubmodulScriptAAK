@@ -41,7 +41,10 @@ class KlubModul:
                 "start_datetime": event_start_datetime,
                 "end_datetime": event_end_datetime,
                 "headcount": self.settings["headcount"],
-                "max_waiting_list": self.settings["max_waiting_list"]
+                "max_waiting_list": self.settings["max_waiting_list"],
+                "title": self.settings["title"],
+                "instructor": self.settings["instructor"],
+                "description": self.settings["description"]
             })
 
             #increase event_start_datetime
@@ -64,7 +67,7 @@ class KlubModul:
                 sleep(1)
 
         #Overskrift
-        self.driver.find_element_by_id("ctl00_ContentPlaceHolderBody_txtName").send_keys('Coronaklatring')
+        self.driver.find_element_by_id("ctl00_ContentPlaceHolderBody_txtName").send_keys(event["title"])
 
         #Område
         area = self.driver.find_element_by_id("ctl00_ContentPlaceHolderBody_ddPool_chosen")
@@ -78,7 +81,6 @@ class KlubModul:
         date_str = event["start_datetime"].strftime("%d-%m-%Y")
         date.send_keys(date_str)
         date.send_keys(Keys.ENTER)
-
 
         #start hours
         self.set_time("ctl00_ContentPlaceHolderBody_ddStartHour_chosen", event["start_datetime"].hour)
@@ -99,10 +101,10 @@ class KlubModul:
         self.driver.find_element_by_id("ctl00_ContentPlaceHolderBody_txtMaxNumberWaitinglist").send_keys(event["max_waiting_list"])
 
         #instructor
-        ins = self.driver.find_element_by_id("ctl00_ContentPlaceHolderBody_ddInstructor_chosen")
-        ins.click()
-        self.wait_by_element_class_name(ins, "chosen-results")
-        ins.find_element_by_class_name("chosen-results").click()
+        self.set_instructor("ctl00_ContentPlaceHolderBody_ddInstructor_chosen", event["instructor"])
+
+        #description
+        #self.set_description("CE_ctl00_ContentPlaceHolderBody_Editor1_ID_Frame", event["description"])
 
         #send + ref for testing if send properly
         ref = self.driver.find_element_by_id("bookingMaintenanceOverview").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")
@@ -138,6 +140,31 @@ class KlubModul:
         self.driver.execute_script("window.close()")
         self.driver.switch_to.window(self.driver.window_handles[0])
         return self.driver.window_handles[0]
+
+
+    #Mikkel - forsøgt implementation af instructor
+    def set_instructor(self, element_id, value):
+        while True:
+            try:
+                ins = self.driver.find_element_by_id(element_id)
+                ins.click()
+                hin = ins.find_element_by_tag_name("input")
+                hin.send_keys(str(value))
+                hin.send_keys(Keys.ENTER)
+                break
+            except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
+                sleep(1)
+
+    # def set_description(self, element_id, value):
+    #     while True:
+    #         try:
+    #             des = self.driver.find_element_by_id(element_id)
+    #             des.click()
+    #             des.send_keys(str(value))
+    #             break
+    #         except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
+    #             sleep(1)
+
 
     def set_time(self, element_id, value):
         while True:
