@@ -104,7 +104,7 @@ class KlubModul:
         self.set_instructor("ctl00_ContentPlaceHolderBody_ddInstructor_chosen", event["instructor"])
 
         #description
-        #self.set_description("CE_ctl00_ContentPlaceHolderBody_Editor1_ID_Frame", event["description"])
+        self.set_description("CE_ctl00_ContentPlaceHolderBody_Editor1_ID_Frame", event["description"])
 
         #send + ref for testing if send properly
         ref = self.driver.find_element_by_id("bookingMaintenanceOverview").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")
@@ -155,15 +155,17 @@ class KlubModul:
             except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
                 sleep(1)
 
-    # def set_description(self, element_id, value):
-    #     while True:
-    #         try:
-    #             des = self.driver.find_element_by_id(element_id)
-    #             des.click()
-    #             des.send_keys(str(value))
-    #             break
-    #         except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
-    #             sleep(1)
+    def set_description(self, element_tag, value):
+        while True:
+            try:
+                frame = self.driver.find_element_by_id(element_tag)
+                self.driver.switch_to_frame(frame)
+                body = self.driver.find_element_by_tag_name('body')
+                body.send_keys(str(value))
+                self.driver.switch_to_default_content()
+                break
+            except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
+                sleep(1)
 
 
     def set_time(self, element_id, value):
