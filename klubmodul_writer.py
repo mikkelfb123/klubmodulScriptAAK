@@ -11,11 +11,8 @@ class KlubModul:
         self.settings = settings
 
         self.driver = driver
-        self.start_datetime = datetime.strptime(self.settings["start_date"] + "-{hours}-{minutes}".format(
-            hours=self.settings["start_hour"], minutes=self.settings["start_minute"]), '%d-%m-%Y-%H-%M')
-        self.end_datetime = datetime.strptime(self.settings["end_date"] + "-{hours}-{minutes}".format(
-            hours=self.settings["end_hour"], minutes=self.settings["end_minute"]), '%d-%m-%Y-%H-%M')
-
+        self.start_datetime = datetime.strptime(self.settings["start_date"] + "-{hours}-{minutes}".format(hours=self.settings["start_hour"], minutes=self.settings["start_minute"]), '%d-%m-%Y-%H-%M')
+        self.end_datetime = datetime.strptime(self.settings["end_date"] + "-{hours}-{minutes}".format(hours=self.settings["end_hour"], minutes=self.settings["end_minute"]), '%d-%m-%Y-%H-%M')
         self.booking_url = self.settings["booking_url"]
         self.events = []
         self.generate_events()
@@ -32,7 +29,7 @@ class KlubModul:
             if event_start_datetime.time() > time(hour=self.settings["end_hour"], minute=self.settings["end_minute"]):
                 event_start_datetime = datetime(day=event_start_datetime.day+1, month=event_start_datetime.month,
                                                 year=event_start_datetime.year, hour=self.settings["start_hour"],
-                                                minute=self.settings["start_hour"])
+                                                minute=self.settings["start_minute"])
 
             #Hvornår stopper eventet
             event_end_datetime = event_start_datetime + timedelta(hours=self.settings["duration_hours"],
